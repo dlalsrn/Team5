@@ -83,7 +83,7 @@ public class GameSelectScreen extends Screen {
         drawManager.initDrawing(this);
 
         drawManager.drawGameSelectScreen(this, this.returnCode);
-
+        
         drawManager.completeDrawing(this);
     }
 }
