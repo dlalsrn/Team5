@@ -428,7 +428,7 @@ public class GameScreen extends Screen {
 						this.lives--;
 						this.logger.info("Hit on player ship, " + this.lives
 								+ " lives remaining.");
-							this.clearItem();
+						this.clearItem();
 
 					} else if (!this.ship.isDestroyed()) {
 						shield = null;
@@ -477,6 +477,12 @@ public class GameScreen extends Screen {
 		this.bullets.removeAll(recyclable);
 		BulletPool.recycle(recyclable);
 	}
+	private void manageMiniCollisions() {
+		for (Bullet bullet : this.bullets)
+				if (checkCollision(bullet, this.ship)) {
+						this.lives = 0;
+					}
+			}
 
 	/**
 	 * Checks if two entities are colliding.
