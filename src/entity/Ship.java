@@ -97,6 +97,15 @@ public class Ship extends Entity {
 //		shield.moveRight();
 	}
 
+	public final void moveUp(){
+		this.positionY -= SPEED;
+	}
+
+	public final void moveDown(){
+		this.positionY += SPEED;
+
+	}
+
 	/**
 	 * Shoots a bullet upwards.
 	 * 

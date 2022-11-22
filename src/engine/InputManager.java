@@ -47,6 +47,7 @@ public final class InputManager implements KeyListener {
 		return keys[keyCode];
 	}
 
+
 	/**
 	 * Changes the state of the key to pressed.
 	 * 

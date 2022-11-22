@@ -19,4 +19,8 @@ public class Shield extends Entity {
 
     public void moveLeft(){ this.positionX -= this.ship.getSpeed();}
 
+    public void moveUp() {this.positionY -= this.ship.getSpeed();}
+
+    public void moveDown() {this.positionY += this.ship.getSpeed();}
+
 }
