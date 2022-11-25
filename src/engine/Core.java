@@ -91,7 +91,7 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
-	private static DrawManager drawManager;
+	private static boolean GO_LOAD = false;
 
 	private static GameState gameState;
 
@@ -158,13 +158,16 @@ public final class Core {
 					break;
 				case 2:
 					// Game & score.
-					currentScreen = new GameSelectScreen(width, height, FPS);
-					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
-							+ " game select screen at " + FPS + " fps.");
-					returnCode = frame.setScreen(currentScreen);
-					LOGGER.info("Closing game select screen.");
-					if (returnCode != 2)
-						break;
+					if (!GO_LOAD) {
+						currentScreen = new GameSelectScreen(width, height, FPS);
+						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+								+ " game select screen at " + FPS + " fps.");
+						returnCode = frame.setScreen(currentScreen);
+						LOGGER.info("Closing game select screen.");
+						if (returnCode != 2)
+							break;
+					}
+					GO_LOAD = false;
 					GO_MAIN = true;
 					do {
 						// One extra live every few levels.
@@ -304,6 +307,7 @@ public final class Core {
 				String save_info [] = getFileManager().loadInfo();
 				gameState = new GameState(Integer.parseInt(save_info[0]), Integer.parseInt(save_info[1]), Integer.parseInt(save_info[2]), Integer.parseInt(save_info[3]), Integer.parseInt(save_info[4]));
 				returnCode = 2;
+				GO_LOAD = true;
 				break;
 				
 			case 6:
