@@ -23,6 +23,7 @@ import screen.HelpScreen;
 import screen.VolumeScreen;
 import screen.StoreScreen;
 import screen.PauseScreen;
+import screen.GameSelectScreen;
 
 import javax.swing.*;
 
@@ -157,6 +158,13 @@ public final class Core {
 					break;
 				case 2:
 					// Game & score.
+					currentScreen = new GameSelectScreen(width, height, FPS);
+					LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
+							+ " game select screen at " + FPS + " fps.");
+					returnCode = frame.setScreen(currentScreen);
+					LOGGER.info("Closing game select screen.");
+					if (returnCode != 2)
+						break;
 					GO_MAIN = true;
 					do {
 						// One extra live every few levels.
@@ -321,6 +329,20 @@ public final class Core {
 						+ " setting screen at " + FPS + " fps.");
 				returnCode = frame.setScreen(currentScreen);
 				LOGGER.info("Closing help screen.");
+				break;
+
+			case 9:		// Run 'Finding a Labyr'
+
+				/** this code is for test. */
+				returnCode = 1;
+
+				break;
+
+			case 10:	// Run 'Bamboo-forest Expert'
+
+				/** this code is for test. */
+				returnCode = 1;
+
 				break;
 
 			}

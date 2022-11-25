@@ -1083,4 +1083,50 @@ public final class DrawManager {
 				screen.getHeight() / 3 * 2 + fontRegularMetrics.getHeight() * 2);
 	}
 
+	public void drawGameSelectScreen(final Screen screen, final int option){
+		String selectString = "Select Game";
+		String instructionsString =
+				"select with w+s / arrows, confirm with space";
+
+		backBufferGraphics.setColor(Color.GREEN);
+		drawCenteredBigString(screen, selectString, screen.getHeight() / 6);
+
+		backBufferGraphics.setColor(Color.GRAY);
+		drawCenteredRegularString(screen, instructionsString, screen.getHeight() / 4);
+
+		/** Need to change names */
+		String game1String = "Space Invader";
+		String game2String = "Finding a Labyr";
+		String game3String = "Bamboo-forest Expert";
+		String menuString = "Main Menu";
+
+		if (option == 2)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, game1String, screen.getHeight()/3
+				+ fontRegularMetrics.getHeight() * 2);
+
+		if (option == 9)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, game2String, screen.getHeight()
+				/ 3 + fontRegularMetrics.getHeight() * 5);
+
+		if (option == 10)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, game3String, screen.getHeight() /
+				3 + fontRegularMetrics.getHeight() * 8);
+
+		if (option == 1)
+			backBufferGraphics.setColor(Color.GREEN);
+		else
+			backBufferGraphics.setColor(Color.WHITE);
+		drawCenteredRegularString(screen, menuString, screen.getHeight() /
+				3 + fontRegularMetrics.getHeight() * 11);
+	}
+
 }
