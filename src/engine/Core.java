@@ -3,6 +3,8 @@ package engine;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
@@ -22,6 +24,8 @@ import screen.VolumeScreen;
 import screen.StoreScreen;
 import screen.PauseScreen;
 import screen.GameSelectScreen;
+
+import javax.swing.*;
 
 /**
  * Implements core game logic.
@@ -87,7 +91,16 @@ public final class Core {
 	/** Logger handler for printing to console. */
 	private static ConsoleHandler consoleHandler;
 
+	private static DrawManager drawManager;
 
+	private static GameState gameState;
+
+	private static Timer timer;
+	private static TimerTask task;
+	private static int count;
+
+	private static JFrame Timer_frame;
+	private static JLabel Time;
 	/**
 	 * Test implementation.
 	 *
@@ -128,7 +141,6 @@ public final class Core {
 		gameSettings.add(SETTINGS_LEVEL_7);
 		gameSettings.add(SETTINGS_Boss_Stage);
 
-		GameState gameState;
 		PermanentState permanentState = PermanentState.getInstance();
 
 		gameState = new GameState(1, 0, MAX_LIVES, 0, 0);
@@ -408,5 +420,38 @@ public final class Core {
 	public static Cooldown getVariableCooldown(final int milliseconds,
 											   final int variance) {
 		return new Cooldown(milliseconds, variance);
+	}
+
+	
+	public static void Check_Time() {
+		Timer_frame = new JFrame();
+		Time = new JLabel();
+		Timer_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Timer_frame.setLocation(1200, 300);
+		Timer_frame.setSize(100, 100);
+		Timer_frame.setVisible(true);
+		Time.setVerticalAlignment(SwingConstants.CENTER);
+		Time.setHorizontalAlignment(SwingConstants.CENTER);
+		Timer_frame.add(Time);
+		count = 0;
+		timer = new Timer();
+		task = new TimerTask() {
+			@Override
+			public void run() {
+				if (gameState.getLivesRemaining() != 0) {
+					String Text;
+					int min, sec;
+					sec = count % 60;
+					min = count / 60;
+					Text = String.format("%02d:%02d", min, sec);
+					Time.setText(Text);
+					count++;
+				}
+				else {
+					timer.cancel();
+				}
+			}
+		};
+		timer.schedule(task, 0, 1000);
 	}
 }
