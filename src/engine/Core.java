@@ -158,7 +158,7 @@ public final class Core {
 					break;
 				case 2:
 					// Game & score.
-					if(!GO_LOAD) {
+					if (!GO_LOAD) {
 						currentScreen = new GameSelectScreen(width, height, FPS);
 						LOGGER.info("Starting " + WIDTH + "x" + HEIGHT
 								+ " game select screen at " + FPS + " fps.");
@@ -167,6 +167,7 @@ public final class Core {
 						if (returnCode != 2)
 							break;
 					}
+					GO_LOAD = false;
 					GO_MAIN = true;
 					do {
 						// One extra live every few levels.
